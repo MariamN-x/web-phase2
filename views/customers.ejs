@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers</title>
+    <link rel="stylesheet" href="./css/adcss.css">
+    <style>
+      .cusBtn{
+        position: relative;
+        margin: 5px;
+        padding: 10px;
+        width: 90px;
+        background:  rgb(62, 0, 0);
+        text-decoration: none;
+        color:white;
+        border-radius: 6px;
+      }          
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a class="navbar-brand" href="/views/Dashboard2.ejs">
+                        <img src="/images/download.png" alt="logo">
+                    </a>
+                </li>
+                <li>
+                    <a href="/Dashboard2.ejs">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/orders.ejs">
+                        <span class="icon">
+                            <ion-icon name="cart-outline"></ion-icon>
+                        </span>
+                        <span class="title">Orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/schaduled.ejs">
+                        <span class="icon">
+                            <ion-icon name="watch-outline"></ion-icon>
+                        </span>
+                        <span class="title">Scheduled</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/customers.ejs">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Customers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/AdminApartments.ejs">
+                        <span class="icon">
+                            <ion-icon name="list-outline"></ion-icon>
+                        </span>
+                        <span class="title">Products</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/sellRequests">
+                        <span class="icon">
+                            <ion-icon name="paper-plane-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sell Requests</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/clientFeedback.ejs">
+                        <span class="icon">
+                            <ion-icon name="document-outline"></ion-icon>
+                        </span>
+                        <span class="title">Client's Feedbacks</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/adminAgents.ejs">
+                        <span class="icon">
+                            <ion-icon name="briefcase-outline"></ion-icon>
+                        </span>
+                        <span class="title">Agents</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/index.ejs">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sign Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+    
+                <div class="logoo">
+                    <img src="/images/download.png" alt="logo">
+                </div>
+    
+                <div class="search">
+                    <label>
+                        <input type="text" placeholder="Search here">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </label>
+                </div>
+            </div>
+    
+            <!-- ======================= Cards ================== -->
+            <div class="cardBox">
+                <div class="card">
+                    <div>
+                        <div class="numbers">1,504</div>
+                        <div class="cardName">Daily Views</div>
+                    </div>
+    
+                    <div class="iconBx">
+                        <ion-icon name="eye-outline"></ion-icon>
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div>
+                        <div class="numbers">80</div>
+                        <div class="cardName">Sales</div>
+                    </div>
+    
+                    <div class="iconBx">
+                        <ion-icon name="cart-outline"></ion-icon>
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div>
+                        <div class="numbers">284</div>
+                        <div class="cardName">Comments</div>
+                    </div>
+    
+                    <div class="iconBx">
+                        <ion-icon name="chatbubbles-outline"></ion-icon>
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div>
+                        <div class="numbers">$7,842</div>
+                        <div class="cardName">Earning</div>
+                    </div>
+    
+                    <div class="iconBx">
+                        <ion-icon name="cash-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+  <!-- ================ customers Details List ================= -->
+
+  <div class="details">
+    <div class="recentOrders">
+        <div class="cardHeader">
+            <h2>Customers</h2>
+            <a href="#" class="btn">View All</a>
+        </div>
+        <table class="tabled">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(user => { %>
+                <tr>
+                    <td><%= user.username %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.password %></td>
+                    <td id="userTableBody">
+                        <button class="cusBtn editBtn" onclick="editUse('<%= user._id %>', '<%= user.username %>', '<%= user.email %>', '<%= user.password %>')">Edit</button>
+                        <form action="/removeUser/<%= user._id %>" method="post">
+                            <button class="cusBtn delete-btn" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+        <div class="button-container">
+            <button id="addBtn" class="button">Add customer</button>
+        </div>
+    </div>
+
+    <!-- Edit Form -->
+    <div id="editForm" style="display: none;" class="o">
+        <form action="/editCustomer" method="post" id="editOrderForm">
+            <input type="hidden" id="edit-id" name="id">
+            <label for="edit-name">Username:</label>
+            <input type="text" id="edit-name" name="name" required><br>
+            <label for="edit-address">Email:</label>
+            <input type="mail" id="edit-address" name="address" required><br>
+            <label for="edit-telephone">Password:</label>
+            <input type="text" id="edit-telephone" name="telephone" required><br>
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+
+    <!-- Add Form -->
+    <div id="addForm" style="display: none;" class="o">
+        <h2>Add customer</h2>
+        <form id="addCustomerForm add-form">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required><br>
+            <label for="email">E-mail:</label><br>
+            <input type="email" id="email" name="email" required><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required><br>
+            <button type="submit" class="button">Add</button>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+
+<!-- Scripts -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Function to handle showing the add form
+document.getElementById('addBtn').addEventListener('click', function() {
+    document.getElementById('addForm').style.display = 'block';
+    document.getElementById('editForm').style.display = 'none';
+});
+
+
+// Function to handle editing a customer
+function editUse(id, username, email, password) {
+    document.getElementById('edit-id').value = id;
+    document.getElementById('edit-name').value = username;
+    document.getElementById('edit-address').value = email;
+    document.getElementById('edit-telephone').value = password;
+    const editForm = document.getElementById('editForm');
+    editForm.classList.toggle('show');
+    document.getElementById('addForm').classList.remove('show');
+}
+
+// Function to handle deleting a customer
+function removeUser(id) {
+    fetch('/removeUser', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id }),
+    })
+    .then(response => {
+        if (response.ok) {
+            location.reload(); // Reload the page after successful deletion
+        } else {
+            console.error('Error deleting customer');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+// Function to handle adding a customer
+document.getElementById('addCustomerForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+        const response = await fetch('/add-customer', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+            alert('Customer added successfully');
+            document.getElementById('addCustomerForm').reset();
+        } else {
+            const errorText = await response.text();
+            alert('Error adding customer: ' + errorText);
+        }
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('Error submitting form: ' + error.message);
+    }
+});
+});
+</script>
+
+<!-- Other scripts and dependencies -->
+<script src="/js/main.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
